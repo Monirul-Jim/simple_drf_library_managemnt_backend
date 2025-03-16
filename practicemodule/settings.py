@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'drf_yasg',
+    'rest_framework_simplejwt',
+    'djoser',
     'rest_framework',
     'library',
 ]
@@ -123,3 +126,22 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+AUTH_USER_MODEL = 'auth.User'  # Important
+DJOSER = {
+    'SERIALIZERS': {
+        'user_create': 'library.serializers.UserCreateSerializer',
+        'user': 'library.serializers.UserSerializer',
+        'current_user': 'library.serializers.UserSerializer',
+    },
+    'JWT_AUTH_REFRESH_TOKEN_SERIALIZER': 'rest_framework_simplejwt.serializers.TokenRefreshSerializer',
+}
+
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('Bearer',),
+}
