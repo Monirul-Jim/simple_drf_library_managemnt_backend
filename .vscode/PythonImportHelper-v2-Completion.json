@@ -1,5 +1,38 @@
 [
     {
+        "label": "django.db.models.deletion",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "django.db.models.deletion",
+        "description": "django.db.models.deletion",
+        "detail": "django.db.models.deletion",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "admin",
         "importPath": "django.contrib",
         "description": "django.contrib",
@@ -24,11 +57,27 @@
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "serializers",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "viewsets",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "status",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
         "documentation": {}
     },
     {
@@ -40,11 +89,59 @@
         "documentation": {}
     },
     {
-        "label": "render",
-        "importPath": "django.shortcuts",
-        "description": "django.shortcuts",
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
         "isExtraImport": true,
-        "detail": "django.shortcuts",
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "include",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "include",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "DefaultRouter",
+        "importPath": "rest_framework.routers",
+        "description": "rest_framework.routers",
+        "isExtraImport": true,
+        "detail": "rest_framework.routers",
+        "documentation": {}
+    },
+    {
+        "label": "api_view",
+        "importPath": "rest_framework.decorators",
+        "description": "rest_framework.decorators",
+        "isExtraImport": true,
+        "detail": "rest_framework.decorators",
+        "documentation": {}
+    },
+    {
+        "label": "Response",
+        "importPath": "rest_framework.response",
+        "description": "rest_framework.response",
+        "isExtraImport": true,
+        "detail": "rest_framework.response",
         "documentation": {}
     },
     {
@@ -73,14 +170,6 @@
         "documentation": {}
     },
     {
-        "label": "path",
-        "importPath": "django.urls",
-        "description": "django.urls",
-        "isExtraImport": true,
-        "detail": "django.urls",
-        "documentation": {}
-    },
-    {
         "label": "get_wsgi_application",
         "importPath": "django.core.wsgi",
         "description": "django.core.wsgi",
@@ -98,12 +187,165 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "library.migrations.0001_initial",
+        "description": "library.migrations.0001_initial",
+        "peekOfCode": "class Migration(migrations.Migration):\n    initial = True\n    dependencies = [\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Author',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),\n                ('name', models.CharField(max_length=255)),",
+        "detail": "library.migrations.0001_initial",
+        "documentation": {}
+    },
+    {
         "label": "LibraryConfig",
         "kind": 6,
         "importPath": "library.apps",
         "description": "library.apps",
         "peekOfCode": "class LibraryConfig(AppConfig):\n    default_auto_field = 'django.db.models.BigAutoField'\n    name = 'library'",
         "detail": "library.apps",
+        "documentation": {}
+    },
+    {
+        "label": "Author",
+        "kind": 6,
+        "importPath": "library.models",
+        "description": "library.models",
+        "peekOfCode": "class Author(models.Model):\n    name = models.CharField(max_length=255)\n    biography = models.TextField()\n    def __str__(self):\n        return self.name\nclass Book(models.Model):\n    title = models.CharField(max_length=255)\n    author = models.ForeignKey(Author, on_delete=models.CASCADE)\n    isbn = models.CharField(max_length=20)\n    category = models.CharField(max_length=100)",
+        "detail": "library.models",
+        "documentation": {}
+    },
+    {
+        "label": "Book",
+        "kind": 6,
+        "importPath": "library.models",
+        "description": "library.models",
+        "peekOfCode": "class Book(models.Model):\n    title = models.CharField(max_length=255)\n    author = models.ForeignKey(Author, on_delete=models.CASCADE)\n    isbn = models.CharField(max_length=20)\n    category = models.CharField(max_length=100)\n    availability_status = models.BooleanField(default=True)\n    def __str__(self):\n        return self.title\nclass Member(models.Model):\n    name = models.CharField(max_length=255)",
+        "detail": "library.models",
+        "documentation": {}
+    },
+    {
+        "label": "Member",
+        "kind": 6,
+        "importPath": "library.models",
+        "description": "library.models",
+        "peekOfCode": "class Member(models.Model):\n    name = models.CharField(max_length=255)\n    email = models.EmailField()\n    membership_date = models.DateField()\n    def __str__(self):\n        return self.name\nclass BorrowRecord(models.Model):\n    book = models.ForeignKey(Book, on_delete=models.CASCADE)\n    member = models.ForeignKey(Member, on_delete=models.CASCADE)\n    borrow_date = models.DateField()",
+        "detail": "library.models",
+        "documentation": {}
+    },
+    {
+        "label": "BorrowRecord",
+        "kind": 6,
+        "importPath": "library.models",
+        "description": "library.models",
+        "peekOfCode": "class BorrowRecord(models.Model):\n    book = models.ForeignKey(Book, on_delete=models.CASCADE)\n    member = models.ForeignKey(Member, on_delete=models.CASCADE)\n    borrow_date = models.DateField()\n    return_date = models.DateField(null=True, blank=True)\n    def __str__(self):\n        return f\"{self.member.name} borrowed {self.book.title}\"",
+        "detail": "library.models",
+        "documentation": {}
+    },
+    {
+        "label": "AuthorSerializer",
+        "kind": 6,
+        "importPath": "library.serializers",
+        "description": "library.serializers",
+        "peekOfCode": "class AuthorSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Author\n        fields = '__all__'\nclass BookSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Book\n        fields = '__all__'\nclass MemberSerializer(serializers.ModelSerializer):\n    class Meta:",
+        "detail": "library.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "BookSerializer",
+        "kind": 6,
+        "importPath": "library.serializers",
+        "description": "library.serializers",
+        "peekOfCode": "class BookSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Book\n        fields = '__all__'\nclass MemberSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Member\n        fields = '__all__'\nclass BorrowRecordSerializer(serializers.ModelSerializer):\n    class Meta:",
+        "detail": "library.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "MemberSerializer",
+        "kind": 6,
+        "importPath": "library.serializers",
+        "description": "library.serializers",
+        "peekOfCode": "class MemberSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Member\n        fields = '__all__'\nclass BorrowRecordSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = BorrowRecord\n        fields = '__all__'",
+        "detail": "library.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "BorrowRecordSerializer",
+        "kind": 6,
+        "importPath": "library.serializers",
+        "description": "library.serializers",
+        "peekOfCode": "class BorrowRecordSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = BorrowRecord\n        fields = '__all__'",
+        "detail": "library.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "kind": 5,
+        "importPath": "library.urls",
+        "description": "library.urls",
+        "peekOfCode": "router = DefaultRouter()\nrouter.register(r'books', BookViewSet)\nrouter.register(r'authors', AuthorViewSet)\nrouter.register(r'members', MemberViewSet)\nrouter.register(r'borrowrecords', BorrowRecordViewSet)\nurlpatterns = [\n    path('', include(router.urls)),\n    path('borrow/', borrow_book, name='borrow_book'),\n    path('return/', return_book, name='return_book'),\n]",
+        "detail": "library.urls",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "library.urls",
+        "description": "library.urls",
+        "peekOfCode": "urlpatterns = [\n    path('', include(router.urls)),\n    path('borrow/', borrow_book, name='borrow_book'),\n    path('return/', return_book, name='return_book'),\n]",
+        "detail": "library.urls",
+        "documentation": {}
+    },
+    {
+        "label": "BookViewSet",
+        "kind": 6,
+        "importPath": "library.views",
+        "description": "library.views",
+        "peekOfCode": "class BookViewSet(viewsets.ModelViewSet):\n    queryset = Book.objects.all()\n    serializer_class = BookSerializer\nclass AuthorViewSet(viewsets.ModelViewSet):\n    queryset = Author.objects.all()\n    serializer_class = AuthorSerializer\nclass MemberViewSet(viewsets.ModelViewSet):\n    queryset = Member.objects.all()\n    serializer_class = MemberSerializer\nclass BorrowRecordViewSet(viewsets.ModelViewSet):",
+        "detail": "library.views",
+        "documentation": {}
+    },
+    {
+        "label": "AuthorViewSet",
+        "kind": 6,
+        "importPath": "library.views",
+        "description": "library.views",
+        "peekOfCode": "class AuthorViewSet(viewsets.ModelViewSet):\n    queryset = Author.objects.all()\n    serializer_class = AuthorSerializer\nclass MemberViewSet(viewsets.ModelViewSet):\n    queryset = Member.objects.all()\n    serializer_class = MemberSerializer\nclass BorrowRecordViewSet(viewsets.ModelViewSet):\n    queryset = BorrowRecord.objects.all()\n    serializer_class = BorrowRecordSerializer\n@api_view(['POST'])",
+        "detail": "library.views",
+        "documentation": {}
+    },
+    {
+        "label": "MemberViewSet",
+        "kind": 6,
+        "importPath": "library.views",
+        "description": "library.views",
+        "peekOfCode": "class MemberViewSet(viewsets.ModelViewSet):\n    queryset = Member.objects.all()\n    serializer_class = MemberSerializer\nclass BorrowRecordViewSet(viewsets.ModelViewSet):\n    queryset = BorrowRecord.objects.all()\n    serializer_class = BorrowRecordSerializer\n@api_view(['POST'])\ndef borrow_book(request):\n    serializer = BorrowRecordSerializer(data=request.data)\n    if serializer.is_valid():",
+        "detail": "library.views",
+        "documentation": {}
+    },
+    {
+        "label": "BorrowRecordViewSet",
+        "kind": 6,
+        "importPath": "library.views",
+        "description": "library.views",
+        "peekOfCode": "class BorrowRecordViewSet(viewsets.ModelViewSet):\n    queryset = BorrowRecord.objects.all()\n    serializer_class = BorrowRecordSerializer\n@api_view(['POST'])\ndef borrow_book(request):\n    serializer = BorrowRecordSerializer(data=request.data)\n    if serializer.is_valid():\n        book_id = request.data.get('book')\n        try:\n            book = Book.objects.get(pk=book_id)",
+        "detail": "library.views",
+        "documentation": {}
+    },
+    {
+        "label": "borrow_book",
+        "kind": 2,
+        "importPath": "library.views",
+        "description": "library.views",
+        "peekOfCode": "def borrow_book(request):\n    serializer = BorrowRecordSerializer(data=request.data)\n    if serializer.is_valid():\n        book_id = request.data.get('book')\n        try:\n            book = Book.objects.get(pk=book_id)\n            if not book.availability_status:\n                return Response({'error': 'Book is not available for borrowing.'}, status=status.HTTP_400_BAD_REQUEST)\n            book.availability_status = False\n            book.save()",
+        "detail": "library.views",
+        "documentation": {}
+    },
+    {
+        "label": "return_book",
+        "kind": 2,
+        "importPath": "library.views",
+        "description": "library.views",
+        "peekOfCode": "def return_book(request):\n    book_id = request.data.get('book')\n    member_id = request.data.get('member')\n    try:\n        borrow_record = BorrowRecord.objects.filter(\n            book_id=book_id, member_id=member_id, return_date__isnull=True).latest('borrow_date')\n        borrow_record.return_date = request.data.get('return_date')\n        borrow_record.save()\n        book = Book.objects.get(pk=book_id)\n        book.availability_status = True",
+        "detail": "library.views",
         "documentation": {}
     },
     {
@@ -156,7 +398,7 @@
         "kind": 5,
         "importPath": "practicemodule.settings",
         "description": "practicemodule.settings",
-        "peekOfCode": "INSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    'rest_framework',\n]\nMIDDLEWARE = [",
+        "peekOfCode": "INSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    'rest_framework',\n    'library',\n]",
         "detail": "practicemodule.settings",
         "documentation": {}
     },
@@ -273,7 +515,7 @@
         "kind": 5,
         "importPath": "practicemodule.urls",
         "description": "practicemodule.urls",
-        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('', include('library.urls')),\n]",
         "detail": "practicemodule.urls",
         "documentation": {}
     },
