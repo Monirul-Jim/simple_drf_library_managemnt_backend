@@ -57,6 +57,14 @@
         "documentation": {}
     },
     {
+        "label": "permissions",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
         "label": "serializers",
         "importPath": "rest_framework",
         "description": "rest_framework",
@@ -78,6 +86,30 @@
         "description": "rest_framework",
         "isExtraImport": true,
         "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "permissions",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "permissions",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "importPath": "django.contrib.auth.models",
+        "description": "django.contrib.auth.models",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth.models",
         "documentation": {}
     },
     {
@@ -129,6 +161,14 @@
         "documentation": {}
     },
     {
+        "label": "Response",
+        "importPath": "rest_framework.response",
+        "description": "rest_framework.response",
+        "isExtraImport": true,
+        "detail": "rest_framework.response",
+        "documentation": {}
+    },
+    {
         "label": "api_view",
         "importPath": "rest_framework.decorators",
         "description": "rest_framework.decorators",
@@ -137,11 +177,11 @@
         "documentation": {}
     },
     {
-        "label": "Response",
-        "importPath": "rest_framework.response",
-        "description": "rest_framework.response",
+        "label": "permission_classes",
+        "importPath": "rest_framework.decorators",
+        "description": "rest_framework.decorators",
         "isExtraImport": true,
-        "detail": "rest_framework.response",
+        "detail": "rest_framework.decorators",
         "documentation": {}
     },
     {
@@ -167,6 +207,22 @@
         "description": "pathlib",
         "isExtraImport": true,
         "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "get_schema_view",
+        "importPath": "drf_yasg.views",
+        "description": "drf_yasg.views",
+        "isExtraImport": true,
+        "detail": "drf_yasg.views",
+        "documentation": {}
+    },
+    {
+        "label": "openapi",
+        "importPath": "drf_yasg",
+        "description": "drf_yasg",
+        "isExtraImport": true,
+        "detail": "drf_yasg",
         "documentation": {}
     },
     {
@@ -241,6 +297,51 @@
         "documentation": {}
     },
     {
+        "label": "IsLibrarian",
+        "kind": 6,
+        "importPath": "library.permissions",
+        "description": "library.permissions",
+        "peekOfCode": "class IsLibrarian(permissions.BasePermission):\n    def has_permission(self, request, view):\n        return request.user.is_staff\nclass IsMember(permissions.BasePermission):\n    def has_permission(self, request, view):\n        return request.user.is_authenticated and not request.user.is_staff\nclass IsLibrarianOrReadOnly(permissions.BasePermission):\n    def has_permission(self, request, view):\n        if request.method in permissions.SAFE_METHODS:\n            return True",
+        "detail": "library.permissions",
+        "documentation": {}
+    },
+    {
+        "label": "IsMember",
+        "kind": 6,
+        "importPath": "library.permissions",
+        "description": "library.permissions",
+        "peekOfCode": "class IsMember(permissions.BasePermission):\n    def has_permission(self, request, view):\n        return request.user.is_authenticated and not request.user.is_staff\nclass IsLibrarianOrReadOnly(permissions.BasePermission):\n    def has_permission(self, request, view):\n        if request.method in permissions.SAFE_METHODS:\n            return True\n        return request.user.is_staff",
+        "detail": "library.permissions",
+        "documentation": {}
+    },
+    {
+        "label": "IsLibrarianOrReadOnly",
+        "kind": 6,
+        "importPath": "library.permissions",
+        "description": "library.permissions",
+        "peekOfCode": "class IsLibrarianOrReadOnly(permissions.BasePermission):\n    def has_permission(self, request, view):\n        if request.method in permissions.SAFE_METHODS:\n            return True\n        return request.user.is_staff",
+        "detail": "library.permissions",
+        "documentation": {}
+    },
+    {
+        "label": "UserCreateSerializer",
+        "kind": 6,
+        "importPath": "library.serializers",
+        "description": "library.serializers",
+        "peekOfCode": "class UserCreateSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = User\n        fields = ('id', 'username', 'password',\n                  'email', 'first_name', 'last_name')\n        extra_kwargs = {'password': {'write_only': True}}\n    def create(self, validated_data):\n        password = validated_data.pop('password', None)\n        instance = self.Meta.model(**validated_data)\n        if password is not None:",
+        "detail": "library.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "UserSerializer",
+        "kind": 6,
+        "importPath": "library.serializers",
+        "description": "library.serializers",
+        "peekOfCode": "class UserSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = User\n        fields = ('id', 'username', 'email', 'first_name', 'last_name')\nclass AuthorSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Author\n        fields = '__all__'\nclass BookSerializer(serializers.ModelSerializer):\n    class Meta:",
+        "detail": "library.serializers",
+        "documentation": {}
+    },
+    {
         "label": "AuthorSerializer",
         "kind": 6,
         "importPath": "library.serializers",
@@ -299,7 +400,7 @@
         "kind": 6,
         "importPath": "library.views",
         "description": "library.views",
-        "peekOfCode": "class BookViewSet(viewsets.ModelViewSet):\n    queryset = Book.objects.all()\n    serializer_class = BookSerializer\nclass AuthorViewSet(viewsets.ModelViewSet):\n    queryset = Author.objects.all()\n    serializer_class = AuthorSerializer\nclass MemberViewSet(viewsets.ModelViewSet):\n    queryset = Member.objects.all()\n    serializer_class = MemberSerializer\nclass BorrowRecordViewSet(viewsets.ModelViewSet):",
+        "peekOfCode": "class BookViewSet(viewsets.ModelViewSet):\n    queryset = Book.objects.all()\n    serializer_class = BookSerializer\n    permission_classes = [IsLibrarianOrReadOnly]\nclass AuthorViewSet(viewsets.ModelViewSet):\n    queryset = Author.objects.all()\n    serializer_class = AuthorSerializer\n    permission_classes = [IsLibrarian]\nclass MemberViewSet(viewsets.ModelViewSet):\n    queryset = Member.objects.all()",
         "detail": "library.views",
         "documentation": {}
     },
@@ -308,7 +409,7 @@
         "kind": 6,
         "importPath": "library.views",
         "description": "library.views",
-        "peekOfCode": "class AuthorViewSet(viewsets.ModelViewSet):\n    queryset = Author.objects.all()\n    serializer_class = AuthorSerializer\nclass MemberViewSet(viewsets.ModelViewSet):\n    queryset = Member.objects.all()\n    serializer_class = MemberSerializer\nclass BorrowRecordViewSet(viewsets.ModelViewSet):\n    queryset = BorrowRecord.objects.all()\n    serializer_class = BorrowRecordSerializer\n@api_view(['POST'])",
+        "peekOfCode": "class AuthorViewSet(viewsets.ModelViewSet):\n    queryset = Author.objects.all()\n    serializer_class = AuthorSerializer\n    permission_classes = [IsLibrarian]\nclass MemberViewSet(viewsets.ModelViewSet):\n    queryset = Member.objects.all()\n    serializer_class = MemberSerializer\n    permission_classes = [IsLibrarian]\nclass BorrowRecordViewSet(viewsets.ModelViewSet):\n    queryset = BorrowRecord.objects.all()",
         "detail": "library.views",
         "documentation": {}
     },
@@ -317,7 +418,7 @@
         "kind": 6,
         "importPath": "library.views",
         "description": "library.views",
-        "peekOfCode": "class MemberViewSet(viewsets.ModelViewSet):\n    queryset = Member.objects.all()\n    serializer_class = MemberSerializer\nclass BorrowRecordViewSet(viewsets.ModelViewSet):\n    queryset = BorrowRecord.objects.all()\n    serializer_class = BorrowRecordSerializer\n@api_view(['POST'])\ndef borrow_book(request):\n    serializer = BorrowRecordSerializer(data=request.data)\n    if serializer.is_valid():",
+        "peekOfCode": "class MemberViewSet(viewsets.ModelViewSet):\n    queryset = Member.objects.all()\n    serializer_class = MemberSerializer\n    permission_classes = [IsLibrarian]\nclass BorrowRecordViewSet(viewsets.ModelViewSet):\n    queryset = BorrowRecord.objects.all()\n    serializer_class = BorrowRecordSerializer\n    permission_classes = [permissions.IsAuthenticated]\n@api_view(['POST'])\n@permission_classes([IsMember])",
         "detail": "library.views",
         "documentation": {}
     },
@@ -326,7 +427,7 @@
         "kind": 6,
         "importPath": "library.views",
         "description": "library.views",
-        "peekOfCode": "class BorrowRecordViewSet(viewsets.ModelViewSet):\n    queryset = BorrowRecord.objects.all()\n    serializer_class = BorrowRecordSerializer\n@api_view(['POST'])\ndef borrow_book(request):\n    serializer = BorrowRecordSerializer(data=request.data)\n    if serializer.is_valid():\n        book_id = request.data.get('book')\n        try:\n            book = Book.objects.get(pk=book_id)",
+        "peekOfCode": "class BorrowRecordViewSet(viewsets.ModelViewSet):\n    queryset = BorrowRecord.objects.all()\n    serializer_class = BorrowRecordSerializer\n    permission_classes = [permissions.IsAuthenticated]\n@api_view(['POST'])\n@permission_classes([IsMember])\ndef borrow_book(request):\n    serializer = BorrowRecordSerializer(data=request.data)\n    if serializer.is_valid():\n        book_id = request.data.get('book')",
         "detail": "library.views",
         "documentation": {}
     },
@@ -389,7 +490,7 @@
         "kind": 5,
         "importPath": "practicemodule.settings",
         "description": "practicemodule.settings",
-        "peekOfCode": "ALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    'rest_framework',",
+        "peekOfCode": "ALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    'drf_yasg',",
         "detail": "practicemodule.settings",
         "documentation": {}
     },
@@ -398,7 +499,7 @@
         "kind": 5,
         "importPath": "practicemodule.settings",
         "description": "practicemodule.settings",
-        "peekOfCode": "INSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    'rest_framework',\n    'library',\n]",
+        "peekOfCode": "INSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    'drf_yasg',\n    'rest_framework_simplejwt',\n    'djoser',",
         "detail": "practicemodule.settings",
         "documentation": {}
     },
@@ -470,7 +571,7 @@
         "kind": 5,
         "importPath": "practicemodule.settings",
         "description": "practicemodule.settings",
-        "peekOfCode": "TIME_ZONE = 'UTC'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.1/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "peekOfCode": "TIME_ZONE = 'UTC'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.1/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nREST_FRAMEWORK = {",
         "detail": "practicemodule.settings",
         "documentation": {}
     },
@@ -479,7 +580,7 @@
         "kind": 5,
         "importPath": "practicemodule.settings",
         "description": "practicemodule.settings",
-        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.1/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.1/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nREST_FRAMEWORK = {\n    'DEFAULT_AUTHENTICATION_CLASSES': (",
         "detail": "practicemodule.settings",
         "documentation": {}
     },
@@ -488,7 +589,7 @@
         "kind": 5,
         "importPath": "practicemodule.settings",
         "description": "practicemodule.settings",
-        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.1/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.1/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nREST_FRAMEWORK = {\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_simplejwt.authentication.JWTAuthentication',",
         "detail": "practicemodule.settings",
         "documentation": {}
     },
@@ -497,7 +598,7 @@
         "kind": 5,
         "importPath": "practicemodule.settings",
         "description": "practicemodule.settings",
-        "peekOfCode": "STATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "peekOfCode": "STATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nREST_FRAMEWORK = {\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_simplejwt.authentication.JWTAuthentication',\n    ),\n}\nAUTH_USER_MODEL = 'auth.User'  # Important",
         "detail": "practicemodule.settings",
         "documentation": {}
     },
@@ -506,8 +607,53 @@
         "kind": 5,
         "importPath": "practicemodule.settings",
         "description": "practicemodule.settings",
-        "peekOfCode": "DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "peekOfCode": "DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nREST_FRAMEWORK = {\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_simplejwt.authentication.JWTAuthentication',\n    ),\n}\nAUTH_USER_MODEL = 'auth.User'  # Important\nDJOSER = {\n    'SERIALIZERS': {\n        'user_create': 'library.serializers.UserCreateSerializer',",
         "detail": "practicemodule.settings",
+        "documentation": {}
+    },
+    {
+        "label": "REST_FRAMEWORK",
+        "kind": 5,
+        "importPath": "practicemodule.settings",
+        "description": "practicemodule.settings",
+        "peekOfCode": "REST_FRAMEWORK = {\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_simplejwt.authentication.JWTAuthentication',\n    ),\n}\nAUTH_USER_MODEL = 'auth.User'  # Important\nDJOSER = {\n    'SERIALIZERS': {\n        'user_create': 'library.serializers.UserCreateSerializer',\n        'user': 'library.serializers.UserSerializer',",
+        "detail": "practicemodule.settings",
+        "documentation": {}
+    },
+    {
+        "label": "AUTH_USER_MODEL",
+        "kind": 5,
+        "importPath": "practicemodule.settings",
+        "description": "practicemodule.settings",
+        "peekOfCode": "AUTH_USER_MODEL = 'auth.User'  # Important\nDJOSER = {\n    'SERIALIZERS': {\n        'user_create': 'library.serializers.UserCreateSerializer',\n        'user': 'library.serializers.UserSerializer',\n        'current_user': 'library.serializers.UserSerializer',\n    },\n    'JWT_AUTH_REFRESH_TOKEN_SERIALIZER': 'rest_framework_simplejwt.serializers.TokenRefreshSerializer',\n}\nSIMPLE_JWT = {",
+        "detail": "practicemodule.settings",
+        "documentation": {}
+    },
+    {
+        "label": "DJOSER",
+        "kind": 5,
+        "importPath": "practicemodule.settings",
+        "description": "practicemodule.settings",
+        "peekOfCode": "DJOSER = {\n    'SERIALIZERS': {\n        'user_create': 'library.serializers.UserCreateSerializer',\n        'user': 'library.serializers.UserSerializer',\n        'current_user': 'library.serializers.UserSerializer',\n    },\n    'JWT_AUTH_REFRESH_TOKEN_SERIALIZER': 'rest_framework_simplejwt.serializers.TokenRefreshSerializer',\n}\nSIMPLE_JWT = {\n    'AUTH_HEADER_TYPES': ('Bearer',),",
+        "detail": "practicemodule.settings",
+        "documentation": {}
+    },
+    {
+        "label": "SIMPLE_JWT",
+        "kind": 5,
+        "importPath": "practicemodule.settings",
+        "description": "practicemodule.settings",
+        "peekOfCode": "SIMPLE_JWT = {\n    'AUTH_HEADER_TYPES': ('Bearer',),\n}",
+        "detail": "practicemodule.settings",
+        "documentation": {}
+    },
+    {
+        "label": "schema_view",
+        "kind": 5,
+        "importPath": "practicemodule.urls",
+        "description": "practicemodule.urls",
+        "peekOfCode": "schema_view = get_schema_view(\n    openapi.Info(\n        title=\"Library Management\",\n        default_version='v1',\n        description=\"API Documentation for Library Management - Here All API endpoints you get here\",\n        terms_of_service=\"https://www.google.com/policies/terms/\",\n        contact=openapi.Contact(email=\"contact@snippets.local\"),\n        license=openapi.License(name=\"BSD License\"),\n    ),\n    public=True,",
+        "detail": "practicemodule.urls",
         "documentation": {}
     },
     {
@@ -515,7 +661,7 @@
         "kind": 5,
         "importPath": "practicemodule.urls",
         "description": "practicemodule.urls",
-        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('', include('library.urls')),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('', include('library.urls')),\n    path('swagger/', schema_view.with_ui('swagger',\n         cache_timeout=0), name='schema-swagger-ui'),\n    path('redoc/', schema_view.with_ui('redoc',\n         cache_timeout=0), name='schema-redoc'),\n    path('auth/', include('djoser.urls')),\n    path('auth/', include('djoser.urls.jwt')),\n]",
         "detail": "practicemodule.urls",
         "documentation": {}
     },

@@ -1,31 +1,38 @@
 from rest_framework import viewsets, status
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Book, Author, Member, BorrowRecord
 from .serializers import BookSerializer, AuthorSerializer, MemberSerializer, BorrowRecordSerializer
+from .permissions import IsLibrarian, IsMember, IsLibrarianOrReadOnly
+from rest_framework import permissions
+from rest_framework.decorators import api_view, permission_classes
 
 
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    permission_classes = [IsLibrarianOrReadOnly]
 
 
 class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
+    permission_classes = [IsLibrarian]
 
 
 class MemberViewSet(viewsets.ModelViewSet):
     queryset = Member.objects.all()
     serializer_class = MemberSerializer
+    permission_classes = [IsLibrarian]
 
 
 class BorrowRecordViewSet(viewsets.ModelViewSet):
     queryset = BorrowRecord.objects.all()
     serializer_class = BorrowRecordSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 
 @api_view(['POST'])
+@permission_classes([IsMember])
 def borrow_book(request):
     serializer = BorrowRecordSerializer(data=request.data)
     if serializer.is_valid():
@@ -44,6 +51,7 @@ def borrow_book(request):
 
 
 @api_view(['POST'])
+@permission_classes([IsMember])
 def return_book(request):
     book_id = request.data.get('book')
     member_id = request.data.get('member')
